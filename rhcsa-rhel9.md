@@ -750,11 +750,11 @@ to edit persistent grub2 parameters, edit config `/etc/default/grub` after writi
 
 for **MBR** system
 
-`grub2-mkconfig -o /boot/grub2/grub.cfg`
+`grub2-mkconfig --update-bls-cmdline -o /boot/grub2/grub.cfg`
 
 for **EFI** system
 
-`grub2-mkconfig -o /boot/efi/EFI/redhat/grub.cfg`
+`grub2-mkconfig --update-bls-cmdline -o /boot/efi/EFI/redhat/grub.cfg`
 
 to check system type, `lsblk` to check if boot partitiono is `/boot` or `/boot/efi`
 
@@ -1067,7 +1067,7 @@ echo "/home/ldap *(rw,no_root_squash)" >> /etc/exports
 
 systemctl enable --now nfs-server
 
-for i in `nfs mountd rpc-bind`; do firewall-cmd --add-service $i --permanent; done
+for i in nfs mountd rpc-bind; do firewall-cmd --add-service $i --permanent; done
 
 firewall-cmd --reload
 
